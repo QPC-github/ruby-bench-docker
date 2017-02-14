@@ -15,6 +15,10 @@ if [ -z "$RUBY_COMMIT_HASH" ]; then
   echo "Running benchmarks using lastest Ruby commit"
 else
   echo "Running benchmarks using Ruby commit $RUBY_COMMIT_HASH"
+  if [ "$ORGANIZATION" != "ruby" ]; then
+    git remote add remote https://github.com/$ORGANIZATION/ruby.git
+    git fetch --all
+  fi
   git reset --hard $RUBY_COMMIT_HASH
 fi
 
